@@ -9,9 +9,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
 /**
- * 用于回复客户端信息的 Channel 事件处理器，回复的内容与客户端发过来的内容一样
+ * 用于回复客户端信息的 Channel 事件处理器，回复的内容与客户端发过来的内容一样（服务器使用）
  *
  * 注解 @Sharable 表示一个 ChannelHandler 可以被多个 Channel 安全地共享
+ * Inbound 表示入站
  * @author lkmc2
  * @date 2019/9/14 10:41
  */
@@ -27,7 +28,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 将传入的消息打印到控制台
         ByteBuf in = (ByteBuf) msg;
-        System.out.println(String.format("Server received: %s", in.toString(CharsetUtil.UTF_8)));
+        System.out.println(String.format("服务器接收到消息： 【%s】", in.toString(CharsetUtil.UTF_8)));
 
         // 将接收到的消息写给发送者，而不冲刷出站消息
         ctx.write(in);
