@@ -65,8 +65,12 @@ public class EchoServer {
             // 将服务器绑定到指定的端口（同步模式，阻塞等待直到绑定完成）
             ChannelFuture future = server.bind().sync();
 
+            System.out.println("Netty 服务器启动成功：http://127.0.0.1/9999");
+
             // 监听通道关闭事件（同步模式，阻塞当前线程直到它完成）
             future.channel().closeFuture().sync();
+
+            System.out.println("Netty 服务器关闭");
         } finally {
             // 优雅地关闭组，释放所有资源
             group.shutdownGracefully();

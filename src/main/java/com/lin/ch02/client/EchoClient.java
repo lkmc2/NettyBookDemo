@@ -19,7 +19,7 @@ public class EchoClient {
     /** 服务器主机地址 **/
     private final String host;
 
-    /** 服务器监听的端口号 **/
+    /** 服务器的端口号 **/
     private final int port;
 
     public EchoClient(String host, int port) {
@@ -55,8 +55,8 @@ public class EchoClient {
             server.group(group)
                     // 设置使用基于NIO 的 Socket 通道
                     .channel(NioSocketChannel.class)
-                    // 设置客户端将连接的服务器主机地址和客户端监听的端口号
-                    .localAddress(new InetSocketAddress(host, port))
+                    // 设置客户端将连接的服务器主机地址和端口号
+                    .remoteAddress(new InetSocketAddress(host, port))
                     // 添加任务的 Handler 事件处理器
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
@@ -66,11 +66,15 @@ public class EchoClient {
                         }
                     });
 
-            // 将客户端绑定到指定的端口（同步模式，阻塞等待直到绑定完成）
-            ChannelFuture future = server.bind().sync();
+            // 将客户端连接到指定的服务器（同步模式，阻塞等待直到绑定完成）
+            ChannelFuture future = server.connect().sync();
+
+            System.out.println("Netty 客户端启动成功");
 
             // 监听通道关闭事件（同步模式，阻塞当前线程直到它完成）
             future.channel().closeFuture().sync();
+
+            System.out.println("Netty 客户端关闭");
         } finally {
             // 优雅地关闭组，释放所有资源
             group.shutdownGracefully();
