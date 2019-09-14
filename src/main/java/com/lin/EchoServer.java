@@ -25,6 +25,7 @@ public class EchoServer {
     public static void main(String[] args) throws InterruptedException {
         if (args.length != 1) {
             System.err.println(String.format("Usage: %s <port>", EchoServer.class.getSimpleName()));
+            return;
         }
 
         int port = Integer.parseInt(args [0]);
@@ -48,7 +49,7 @@ public class EchoServer {
 
             // 设置服务器使用的组
             server.group(group)
-                    // 设置使用基于NIO 的 Socket 通道
+                    // 设置使用基于NIO 服务的 Socket 通道
                     .channel(NioServerSocketChannel.class)
                     // 设置服务器监听的端口号
                     .localAddress(new InetSocketAddress(port))
