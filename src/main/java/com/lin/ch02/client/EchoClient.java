@@ -1,4 +1,4 @@
-package com.lin.client;
+package com.lin.ch02.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

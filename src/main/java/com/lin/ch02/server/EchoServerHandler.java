@@ -1,4 +1,4 @@
-package com.lin.server;
+package com.lin.ch02.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

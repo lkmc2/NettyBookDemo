@@ -1,4 +1,4 @@
-package com.lin.server;
+package com.lin.ch02.server;
 import	java.net.InetSocketAddress;
 
 import io.netty.bootstrap.ServerBootstrap;
