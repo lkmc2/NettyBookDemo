@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * EmbeddedChannel 测试
+ * 入站 EmbeddedChannel 测试
  * @author lkmc2
  * @date 2019/9/15 13:09
  */
