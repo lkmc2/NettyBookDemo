@@ -1,4 +1,4 @@
-package com.lin.ch10;
+package com.lin.ch10.decoder;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;

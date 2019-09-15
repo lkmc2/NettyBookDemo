@@ -1,4 +1,4 @@
-package com.lin.ch10;
+package com.lin.ch10.decoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

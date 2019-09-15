@@ -1,5 +1,6 @@
 package com.lin.ch10;
 
+import com.lin.ch10.decoder.ToIntegerDecoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
