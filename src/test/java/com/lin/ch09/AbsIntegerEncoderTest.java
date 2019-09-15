@@ -19,7 +19,7 @@ public class AbsIntegerEncoderTest {
         // 创建（获取）堆中的缓存字节
         ByteBuf buf = Unpooled.buffer();
 
-        // 存储 10 个字节的负数数据
+        // 存储 10 个负数数据
         for (int i = 0; i < 10; i++) {
             buf.writeInt(i * -1);
         }
