@@ -54,4 +54,45 @@ public class FixedLengthFrameDecoderTest {
         buf.release();
     }
 
+    @Test
+    public void testFramesDecoded2() throws IllegalAccessException {
+        // 创建（获取）堆中的缓存字节
+        ByteBuf buf = Unpooled.buffer();
+
+        // 存储 9 字节的数据
+        for (int i = 0; i < 9; i++) {
+            buf.writeByte(i);
+        }
+
+        // 拷贝字节数据（浅拷贝，修改该变量可能的原来的字节数据产生影响）
+        ByteBuf input = buf.duplicate();
+
+        // 创建一个 EmbeddedChannel，并添加一个 FixedLengthFrameDecoder，其将以 3 字节的帧长度被测试
+        EmbeddedChannel channel = new EmbeddedChannel(new FixedLengthFrameDecoder(3));
+
+        // 将数据写入 EmbeddedChannel
+        assertFalse(channel.writeInbound(input.readBytes(2))); // 返回 false ，因为没有一个完整的可供读取的帧
+        assertTrue(channel.writeInbound(input.readBytes(7)));
+
+        // 标记 Channel 为已完成状态
+        assertTrue(channel.finish());
+
+        // 读取所生成的消息，并且验证是否有 3 帧（切片），其中每帧（切片）都为 3 字节
+        ByteBuf read = channel.readInbound();
+        assertEquals(buf.readSlice(3), read);
+        read.release();
+
+        read = channel.readInbound();
+        assertEquals(buf.readSlice(3), read);
+        read.release();
+
+        read = channel.readInbound();
+        assertEquals(buf.readSlice(3), read);
+        read.release();
+
+        // 上面已经读取完 9 个字节，所以这里没有字节可以读取
+        assertNull(channel.readInbound());
+        buf.release();
+    }
+
 }
