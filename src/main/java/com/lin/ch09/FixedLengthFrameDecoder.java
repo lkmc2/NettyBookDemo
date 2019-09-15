@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 固定长度的栈帧解码器（用于入站 EmbeddedChannel 测试）
+ *
+ * 拓展 ByteToMessageDecoder 以处理入站字节，并将它们解码为消息
  * @author lkmc2
  * @date 2019/9/15 12:15
  */
